@@ -1,13 +1,13 @@
 package Game;
 
-public class GameLauncher {
+import java.awt.EventQueue;
 	
-	public GameLauncher() {
-		new Window();
-	}
-	
-	public static void main(String[] args) {
-		new GameLauncher();
-	}
+public static void main(String[] args) {
+        
+        EventQueue.invokeLater(() -> {
+            Application ex = new Application();
+            ex.setVisible(true);
+        });
+    }
 
 }
