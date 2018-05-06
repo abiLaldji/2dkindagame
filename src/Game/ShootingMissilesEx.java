@@ -3,29 +3,34 @@ package Game;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
-public class MovingSpriteEx extends JFrame {
+public class ShootingMissilesEx extends JFrame {
+	
+	
+	private int WIDTH = 1000;
+	private int HEIGHT = 1000;
 
-    public MovingSpriteEx() {
+
+    public ShootingMissilesEx() {
         
         initUI();
     }
     
     private void initUI() {
-
-        add(new Window());
-
-        setTitle("Moving sprite");
-        setSize(400, 300);
         
-        setLocationRelativeTo(null);
+        add(new Window());
+        
+        setSize(WIDTH, HEIGHT);
         setResizable(false);
+        
+        setTitle("Shooting missiles");
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public static void main(String[] args) {
-
+        
         EventQueue.invokeLater(() -> {
-            MovingSpriteEx ex = new MovingSpriteEx();
+            ShootingMissilesEx ex = new ShootingMissilesEx();
             ex.setVisible(true);
         });
     }

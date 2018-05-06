@@ -1,68 +1,46 @@
 package Game;
 
-
-import java.awt.Image;
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Plane {
+public class Plane extends Mobile {
 
     private int dx;
     private int dy;
-    private int x = 40;
-    private int y = 60;
-    private int w;
-    private int h;
-    private Image image;
+    private List<Missile> missiles;
 
-    public Plane() {
-
-        loadImage();
+    public Plane(int x, int y) {
+        super(x, y);
+        
+        initPlane();
     }
 
-    private void loadImage() {
+    private void initPlane() {
+
+        missiles = new ArrayList<>();
         
-        ImageIcon ii = new ImageIcon("images/plane.png");
-        image = ii.getImage(); 
-        
-        w = image.getWidth(null);
-        h = image.getHeight(null);
+        loadImage("images/plane.png"); 
+        resizeImage(this.image,100, 100);
+        getImageDimensions();
     }
 
     public void move() {
-        
         x += dx;
         y += dy;
     }
 
-    public int getX() {
-        
-        return x;
-    }
-
-    public int getY() {
-        
-        return y;
-    }
-    
-    public int getWidth() {
-        
-        return w;
-    }
-    
-    public int getHeight() {
-        
-        return h;
-    }    
-
-    public Image getImage() {
-        
-        return image;
+    public List<Missile> getMissiles() {
+        return missiles;
     }
 
     public void keyPressed(KeyEvent e) {
 
         int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_SPACE) {
+            fire();
+        }
 
         if (key == KeyEvent.VK_LEFT) {
             dx = -2;
@@ -81,8 +59,12 @@ public class Plane {
         }
     }
 
+    public void fire() {
+        missiles.add(new Missile(x + width, y + height / 2));
+    }
+
     public void keyReleased(KeyEvent e) {
-        
+
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT) {

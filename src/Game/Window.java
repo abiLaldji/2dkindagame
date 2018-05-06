@@ -8,14 +8,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Window extends JPanel implements ActionListener {
 
+    private final int ICRAFT_X = 100;
+    private final int ICRAFT_Y = 500;
+    private final int DELAY = 10;
     private Timer timer;
     private Plane plane;
-    private final int DELAY = 10;
 
     public Window() {
 
@@ -26,10 +29,10 @@ public class Window extends JPanel implements ActionListener {
 
         addKeyListener(new TAdapter());
         setFocusable(true);
-        setBackground(Color.black);
+        setBackground(Color.CYAN);
         setDoubleBuffered(true);
 
-        plane = new Plane();
+        plane = new Plane(ICRAFT_X, ICRAFT_Y);
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -40,31 +43,57 @@ public class Window extends JPanel implements ActionListener {
         super.paintComponent(g);
 
         doDrawing(g);
-        
+
         Toolkit.getDefaultToolkit().sync();
     }
-    
-    private void doDrawing(Graphics g) {
-        
-        Graphics2D g2d = (Graphics2D) g;
 
-        g2d.drawImage(plane.getImage(), plane.getX(), 
-            plane.getY(), this);
+    private void doDrawing(Graphics g) {
+
+        Graphics2D g2d = (Graphics2D) g;
+        
+        g2d.drawImage(plane.getImage(), plane.getX(),
+                plane.getY(), this);
+
+        List<Missile> missiles = plane.getMissiles();
+
+        for (Missile missile : missiles) {
+            
+            g2d.drawImage(missile.getImage(), missile.getX(),
+                    missile.getY(), this);
+        }
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        step();
+
+        updateMissiles();
+        updateSpaceShip();
+
+        repaint();
     }
-    
-    private void step() {
-        
+
+    private void updateMissiles() {
+
+        List<Missile> missiles = plane.getMissiles();
+
+        for (int i = 0; i < missiles.size(); i++) {
+
+            Missile missile = missiles.get(i);
+
+            if (missile.isVisible()) {
+
+                missile.move();
+            } else {
+
+                missiles.remove(i);
+            }
+        }
+    }
+
+    private void updateSpaceShip() {
+
         plane.move();
-        
-        repaint(plane.getX()-1, plane.getY()-1, 
-                plane.getWidth()+2, plane.getHeight()+2);     
-    }    
+    }
 
     private class TAdapter extends KeyAdapter {
 
@@ -79,4 +108,3 @@ public class Window extends JPanel implements ActionListener {
         }
     }
 }
-
