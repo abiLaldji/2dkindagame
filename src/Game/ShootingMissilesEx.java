@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 
 public class ShootingMissilesEx extends JFrame {
 	
-	
 	private int WIDTH = 1000;
 	private int HEIGHT = 1000;
 

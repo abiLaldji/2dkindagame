@@ -28,6 +28,23 @@ public class Plane extends Mobile {
     public void move() {
         x += dx;
         y += dy;
+        if (x < 1) {
+        	x = 900;
+        	}
+        	 
+        if (y < 1) {
+        	y = 900;
+        	}
+        
+        if (y > 900) {
+        	y = 1;
+        	}
+        
+        if (x > 900) {
+        	x = 1;
+        } 
+        
+      
     }
 
     public List<Missile> getMissiles() {
@@ -58,11 +75,59 @@ public class Plane extends Mobile {
             dy = 2;
         }
     }
+    
+    public void keyPressed2(KeyEvent e) {
+
+        int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_C) {
+            fire();
+        }
+
+        if (key == KeyEvent.VK_Q) {
+            dx = -2;
+        }
+
+        if (key == KeyEvent.VK_D) {
+            dx = 2;
+        }
+
+        if (key == KeyEvent.VK_Z) {
+            dy = -2;
+        }
+
+        if (key == KeyEvent.VK_S) {
+            dy = 2;
+        }
+    }
+    
+    
 
     public void fire() {
         missiles.add(new Missile(x + width, y + height / 2));
     }
 
+    public void keyReleased2(KeyEvent e) {
+
+        int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_Q) {
+            dx = 0;
+        }
+
+        if (key == KeyEvent.VK_D) {
+            dx = 0;
+        }
+
+        if (key == KeyEvent.VK_Z) {
+            dy = 0;
+        }
+
+        if (key == KeyEvent.VK_S) {
+            dy = 0;
+        }
+    }
+    
     public void keyReleased(KeyEvent e) {
 
         int key = e.getKeyCode();
@@ -83,4 +148,5 @@ public class Plane extends Mobile {
             dy = 0;
         }
     }
+  
 }

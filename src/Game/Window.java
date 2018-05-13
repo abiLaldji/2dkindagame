@@ -14,11 +14,14 @@ import javax.swing.Timer;
 
 public class Window extends JPanel implements ActionListener {
 
-    private final int ICRAFT_X = 100;
-    private final int ICRAFT_Y = 500;
+    private final int SPAWN_X_1 = 100;
+    private final int SPAWN_Y_1 = 500;
+    private final int SPAWN_X_2 = 800;
+    private final int SPAWN_Y_2 = 500;
     private final int DELAY = 10;
     private Timer timer;
     private Plane plane;
+    private Plane plane2;
 
     public Window() {
 
@@ -32,7 +35,9 @@ public class Window extends JPanel implements ActionListener {
         setBackground(Color.CYAN);
         setDoubleBuffered(true);
 
-        plane = new Plane(ICRAFT_X, ICRAFT_Y);
+        plane = new Plane(SPAWN_X_1, SPAWN_Y_1);
+        plane2 = new Plane(SPAWN_X_2, SPAWN_Y_2);
+
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -42,12 +47,13 @@ public class Window extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        doDrawing(g);
+        doDrawing(g, plane);
+        doDrawing(g, plane2);
 
         Toolkit.getDefaultToolkit().sync();
     }
 
-    private void doDrawing(Graphics g) {
+    private void doDrawing(Graphics g, Plane plane) {
 
         Graphics2D g2d = (Graphics2D) g;
         
@@ -75,6 +81,8 @@ public class Window extends JPanel implements ActionListener {
     private void updateMissiles() {
 
         List<Missile> missiles = plane.getMissiles();
+        List<Missile> missiles2 = plane2.getMissiles();
+
 
         for (int i = 0; i < missiles.size(); i++) {
 
@@ -88,11 +96,26 @@ public class Window extends JPanel implements ActionListener {
                 missiles.remove(i);
             }
         }
+        
+        for (int i = 0; i < missiles2.size(); i++) {
+
+            Missile missile = missiles2.get(i);
+
+            if (missile.isVisible()) {
+
+                missile.move();
+            } else {
+
+                missiles2.remove(i);
+            }
+            
+        }
     }
 
     private void updateSpaceShip() {
 
         plane.move();
+        plane2.move();
     }
 
     private class TAdapter extends KeyAdapter {
@@ -100,11 +123,13 @@ public class Window extends JPanel implements ActionListener {
         @Override
         public void keyReleased(KeyEvent e) {
             plane.keyReleased(e);
+            plane2.keyReleased2(e);
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
             plane.keyPressed(e);
+            plane2.keyPressed2(e);
         }
     }
 }
