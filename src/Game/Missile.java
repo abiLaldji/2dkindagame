@@ -2,14 +2,15 @@ package Game;
 
 
 public class Missile extends Mobile {
+	
+	private final int SPEED = 3;
 
-    private final int BOARD_WIDTH = 1280;
-    private final int MISSILE_SPEED = 2;
-
-    public Missile(int x, int y) {
-        super(x, y);
-        
+    public Missile(int x, int y, int direction) {
+        super(x, y);  
         initMissile();
+        launchMissile(direction);
+        
+        
     }
     
     private void initMissile() {
@@ -18,13 +19,17 @@ public class Missile extends Mobile {
         resizeImage(image, 60, 60);
         getImageDimensions();
     }
-
-    public void move() {
-        
-        x += MISSILE_SPEED;
-        
-        if (x > BOARD_WIDTH) {
-            visible = false;
-        }
-    }
+    
+    private void launchMissile(int direction) {
+    	switch (direction) {
+    		case 1: setDy(-SPEED);; System.out.println("upv"); break;
+    		case 2: setDy(SPEED);; break;
+    		case 3: setDx(-SPEED); break;
+    		case 4: setDx(SPEED);; break;
+    		default : System.out.println("move pas");
+    	}
+    	
+    } 
+    
+    
 }

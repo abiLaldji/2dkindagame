@@ -52,6 +52,16 @@ public class Window extends JPanel implements ActionListener {
 
         Toolkit.getDefaultToolkit().sync();
     }
+    
+    /*public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
+        AffineTransform old = g2d.getTransform();
+        g2d.rotate(Math.toRadians(degrees));
+        //draw shape/image (will be rotated)
+        g2d.setTransform(old);
+        //things you draw after here will not be rotated
+    }*/
 
     private void doDrawing(Graphics g, Plane plane) {
 
@@ -59,6 +69,7 @@ public class Window extends JPanel implements ActionListener {
         
         g2d.drawImage(plane.getImage(), plane.getX(),
                 plane.getY(), this);
+        //g2d.rotate(Math.toRadians(45));
 
         List<Missile> missiles = plane.getMissiles();
 
@@ -73,7 +84,7 @@ public class Window extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         updateMissiles();
-        updateSpaceShip();
+        updatePlane();
 
         repaint();
     }
@@ -87,32 +98,18 @@ public class Window extends JPanel implements ActionListener {
         for (int i = 0; i < missiles.size(); i++) {
 
             Missile missile = missiles.get(i);
-
-            if (missile.isVisible()) {
-
-                missile.move();
-            } else {
-
-                missiles.remove(i);
-            }
+            missile.move();       
         }
         
         for (int i = 0; i < missiles2.size(); i++) {
 
             Missile missile = missiles2.get(i);
-
-            if (missile.isVisible()) {
-
-                missile.move();
-            } else {
-
-                missiles2.remove(i);
-            }
-            
+            missile.move();
+ 
         }
     }
 
-    private void updateSpaceShip() {
+    private void updatePlane() {
 
         plane.move();
         plane2.move();

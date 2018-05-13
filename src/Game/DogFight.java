@@ -3,13 +3,13 @@ package Game;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
-public class ShootingMissilesEx extends JFrame {
+public class DogFight extends JFrame {
 	
 	private int WIDTH = 1000;
 	private int HEIGHT = 1000;
 
 
-    public ShootingMissilesEx() {
+    public DogFight() {
         
         initUI();
     }
@@ -21,7 +21,7 @@ public class ShootingMissilesEx extends JFrame {
         setSize(WIDTH, HEIGHT);
         setResizable(false);
         
-        setTitle("Shooting missiles");
+        setTitle("Dogfight");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -29,7 +29,7 @@ public class ShootingMissilesEx extends JFrame {
     public static void main(String[] args) {
         
         EventQueue.invokeLater(() -> {
-            ShootingMissilesEx ex = new ShootingMissilesEx();
+        	DogFight ex = new DogFight();
             ex.setVisible(true);
         });
     }

@@ -9,6 +9,8 @@ public class Mobile {
     protected int y;
     protected int width;
     protected int height;
+    private int dx;
+    private int dy;
     protected boolean visible;
     protected Image image;
 
@@ -36,6 +38,27 @@ public class Mobile {
         
     }    
     
+    public void move() {
+        x += dx;
+        y += dy;
+        if (x < 1) {
+        	x = 900;
+        	}
+        	 
+        if (y < 1) {
+        	y = 900;
+        	}
+        
+        if (y > 900) {
+        	y = 1;
+        	}
+        
+        if (x > 900) {
+        	x = 1;
+        } 
+        
+      
+    }
     
 
     public Image getImage() {
@@ -49,6 +72,15 @@ public class Mobile {
     public int getY() {
         return y;
     }
+    
+    public void setDx(int direction) {
+    	this.dx = direction;
+    }
+    
+    public void setDy(int direction) {
+    	this.dy = direction;
+    }
+    
 
     public boolean isVisible() {
         return visible;
