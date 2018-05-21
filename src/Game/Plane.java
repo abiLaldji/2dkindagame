@@ -9,11 +9,11 @@ public class Plane extends Mobile {
 
     private List<Missile> missiles;
     private Order direction = Order.UP;
+    private final int size = 100;
 
 
     public Plane(int x, int y) {
         super(x, y);
-        
         initPlane();
     }
 
@@ -22,7 +22,7 @@ public class Plane extends Mobile {
         missiles = new ArrayList<>();
         
         loadImage("images/plane.png"); 
-        resizeImage(this.image,100, 100);
+        resizeImage(this.image, size, size);
         getImageDimensions();
     }
     
@@ -30,7 +30,6 @@ public class Plane extends Mobile {
     	switch (direction) {
     	case UP:
     		missiles.add(new Missile(x + width, y + height / 2, 1));
-    		System.out.println("up");
     		break;
     	case DOWN:
             missiles.add(new Missile(x + width, y + height / 2, 2));
@@ -42,7 +41,6 @@ public class Plane extends Mobile {
             missiles.add(new Missile(x + width, y + height / 2, 4));
             break;
         default:
-        	System.out.println("donne pas direction");
        }
     }
 

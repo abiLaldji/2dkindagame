@@ -1,6 +1,8 @@
 package Game;
 
 import java.awt.Image;
+import java.awt.Rectangle;
+
 import javax.swing.ImageIcon;
 
 public class Mobile {
@@ -60,6 +62,10 @@ public class Mobile {
       
     }
     
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
 
     public Image getImage() {
         return image;

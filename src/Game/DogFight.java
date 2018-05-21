@@ -10,8 +10,7 @@ public class DogFight extends JFrame {
 
 
     public DogFight() {
-        
-        initUI();
+            initUI();
     }
     
     private void initUI() {
@@ -29,8 +28,8 @@ public class DogFight extends JFrame {
     public static void main(String[] args) {
         
         EventQueue.invokeLater(() -> {
-        	DogFight ex = new DogFight();
-            ex.setVisible(true);
+        	DogFight dog = new DogFight();
+            dog.setVisible(true);
         });
     }
 }

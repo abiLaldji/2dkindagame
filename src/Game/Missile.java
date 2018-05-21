@@ -3,7 +3,8 @@ package Game;
 
 public class Missile extends Mobile {
 	
-	private final int SPEED = 3;
+	private final int SPEED = 4;
+	private final int mesure = 70;
 
     public Missile(int x, int y, int direction) {
         super(x, y);  
@@ -16,20 +17,16 @@ public class Missile extends Mobile {
     private void initMissile() {
         
         loadImage("images/missile.png");  
-        resizeImage(image, 60, 60);
+        resizeImage(this.image, mesure, mesure);
         getImageDimensions();
     }
     
     private void launchMissile(int direction) {
     	switch (direction) {
-    		case 1: setDy(-SPEED);; System.out.println("upv"); break;
-    		case 2: setDy(SPEED);; break;
+    		case 1: setDy(-SPEED); break;
+    		case 2: setDy(SPEED); break;
     		case 3: setDx(-SPEED); break;
-    		case 4: setDx(SPEED);; break;
-    		default : System.out.println("move pas");
+    		case 4: setDx(SPEED); break;
     	}
-    	
-    } 
-    
-    
+    }     
 }
